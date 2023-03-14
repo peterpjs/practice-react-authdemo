@@ -27,8 +27,8 @@ export  const authSlice=createSlice({
             state.user=action.payload.user;
 
             const curretTime=Date.now();
-           // const timeout=1000*60*60*24*7;
-            const timeout=10000;
+            const timeout=1000*60*60*24*7;
+           // const timeout=10000;
 
             state.expirationTime=curretTime+timeout;
             localStorage.setItem('token',state.token);

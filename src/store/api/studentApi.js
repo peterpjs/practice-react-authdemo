@@ -3,14 +3,25 @@ import {fetchBaseQuery} from "@reduxjs/toolkit/dist/query/react";
 const studentApi=createApi({
     reducerPath:'studentApi',
     baseQuery:fetchBaseQuery({
-        baseUrl:"http://localhost:1337/api/"
+        baseUrl:"http://localhost:1337/api/",
+        //统一设置请求头
+        prepareHeaders:(headers,{getState})=>{
+            const token=getState().auth.token;
+            if(token){
+                headers.set("Authorization",`Bearer ${token}`);
+
+            }
+            return headers;
+        }
     }),
     tagTypes:['student'],
     endpoints(build) {
         return {
             getStudents:build.query({
                 query() {
-                    return 'students'
+                    return {
+                        url:'students'
+                    }
                 },
                 transformResponse(baseQueryReturnValue, meta, arg) {
                     return baseQueryReturnValue.data;
