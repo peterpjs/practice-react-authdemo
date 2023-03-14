@@ -1,14 +1,15 @@
-import React  from 'react';
-import { Route, Routes,Navigate} from "react-router-dom";
+import { Route, Routes} from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
 import Layout from "./components/layout";
 import AuthPage from "./pages/AuthPage";
-import {useSelector} from "react-redux";
 import NeedAuth from "./components/NeedAuth";
+import useAutoLogout from "./hooks/useAutoLogout";
+import StudentPage from "./pages/StudentPage";
 
 const App = () => {
-    const auth=useSelector(state=>state.auth);
+
+    useAutoLogout();
     return (
         <Layout>
             <Routes>
@@ -19,6 +20,7 @@ const App = () => {
                     </NeedAuth>
                 }/>
                 <Route path={"/auth-form"} element={<AuthPage/>}/>
+                <Route path={"/student"} element={ <NeedAuth><StudentPage/></NeedAuth>}/>
 
             </Routes>
         </Layout>

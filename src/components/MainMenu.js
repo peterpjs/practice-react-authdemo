@@ -16,6 +16,7 @@ const MainMenu = () => {
                     !auth.isLogged&& <li>
                         <Link to={"/auth-form"}>登录/注册</Link>
                     </li>
+
                 }
 
 
@@ -23,6 +24,7 @@ const MainMenu = () => {
                     auth.isLogged&&
                         <>
                             <li><Link to={"/profile"}>{auth.user.username}</Link></li>
+                            <li><Link to={"/student"} >学生信息</Link></li>
                             <li><Link to={"/"} onClick={()=>dispatch(logout())}>登出</Link></li>
 
                         </>
